@@ -38,3 +38,8 @@ next-env.d.ts
 
 package-lock.json
 
+# This makes sure that our secret keys are not pushed to the repository
+# We dont want to expose our secret keys to the public
+.env
+.env.local
+
