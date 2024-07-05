@@ -28,7 +28,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const analytics = getAnalytics(app);
+let analytics;
+if (process.env.NODE_ENV === "production") {
+  analytics = getAnalytics(app);
+}
 
 const auth = getAuth(app);
 
