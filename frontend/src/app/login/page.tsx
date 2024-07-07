@@ -2,14 +2,18 @@
 
 import React, { useEffect } from "react";
 import { signInWithGoogle } from "../utils/firebaseAuth"; // Adjust path as necessary
-import LoginNavbar from "../components/LoginNavbar";
+import LoginNavbar from "../components//LoginPage/LoginNavbar";
+import LoginHeroSection from "../components/LoginPage/LoginHeroSection";
+import LoginCards from "../components/LoginPage/LoginCards";
 
 function LoginPage() {
  
 
   return (
-    <div className="h-24">
+    <div className="">
       <LoginNavbar google={signInWithGoogle} />
+      <LoginHeroSection />
+      <LoginCards />
 
     </div>
   );
