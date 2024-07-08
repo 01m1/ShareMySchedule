@@ -1,18 +1,6 @@
-// Import the functions you need from the SDKs you need
-
-import { initializeApp, getApps, getApp} from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-
-
-// TODO: Add SDKs for Firebase products that you want to use
-
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -24,19 +12,37 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-
-
-
-
+// Initialize Firebase, authenticaltion, and Firestore
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-
-
-
 const auth = getAuth(app);
-
 const firestore = getFirestore(app);
 
 
+// Collection from Firestore
+const colRef = collection(firestore, "users");
 
-export { auth, firestore, app};
+// Get the collection reference
+getDocs(colRef)
+.then((snapshot) => {
+  // creating our own array of users
+  let users = [];
+
+  // Loop through each document and add the id and data to the users array
+  // the data() method returns an object with all the fields of the document
+  snapshot.forEach((doc) => { 
+    users.push({
+      id: doc.id,
+      ...doc.data()
+    
+    })
+  });
+
+})
+.catch((error) => {
+  console.error("Error getting documents: ", error);
+});
+
+
+
+
+export { app, auth, firestore };
