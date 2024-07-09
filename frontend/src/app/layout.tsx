@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import LoginNavbar from "./components/LoginNavbar";
+import LoginNavbar from "./components/LoginPage/LoginNavbar";
 import { signInWithGoogle } from "./utils/firebaseAuth";
 
 const inter = Inter({ subsets: ["latin"] });

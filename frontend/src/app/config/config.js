@@ -23,24 +23,24 @@ const colRef = collection(firestore, "users");
 
 // Get the collection reference
 getDocs(colRef)
-.then((snapshot) => {
-  // creating our own array of users
-  let users = [];
+  .then((snapshot) => {
+    // creating our own array of users
+    let users = [];
 
-  // Loop through each document and add the id and data to the users array
-  // the data() method returns an object with all the fields of the document
-  snapshot.forEach((doc) => { 
-    users.push({
-      id: doc.id,
-      ...doc.data()
-    
-    })
+    // Loop through each document and add the id and data to the users array
+    // the data() method returns an object with all the fields of the document
+    snapshot.forEach((doc) => {
+      users.push({
+        id: doc.id,
+        ...doc.data()
+
+      })
+    });
+
+  })
+  .catch((error) => {
+    console.error("Error getting documents: ", error);
   });
-
-})
-.catch((error) => {
-  console.error("Error getting documents: ", error);
-});
 
 
 

@@ -1,10 +1,14 @@
+'use client'; // marks the component as a client component
 
 import React from 'react'
 import Image from 'next/image'
 import logo from '../../../../images/icons8-coffee-pot-16.png'
 import {motion} from 'framer-motion'
+import { signInWithGoogle } from '@/app/utils/firebaseAuth';
 
-function LoginNavbar({google}: {google: () => void}){
+
+
+function LoginNavbar(){
   return (
     <div className='flex justify-between p-6 bg-black h-24'>
       <div className='flex items-center gap-2'>
@@ -14,7 +18,7 @@ function LoginNavbar({google}: {google: () => void}){
         <h1 className='text-2xl font-bold text-white'>Share My Schedule</h1>
       </div>
 
-      <button onClick={google} className='bg-gradient-to-r from-darkest-purple to-light-purple text-white font-bold px-6 transition duration-500 ease-in-out hover:bg-blue-600 hover:rounded-full   ' >
+      <button onClick={signInWithGoogle} className='bg-gradient-to-r from-darkest-purple to-light-purple text-white font-bold px-6 transition duration-500 ease-in-out hover:bg-blue-600 hover:rounded-full   ' >
       Sign in
       </button>
 
