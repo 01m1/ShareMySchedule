@@ -11,7 +11,7 @@ function LoginPage() {
 
   return (
     <div className="">
-      <LoginNavbar google={signInWithGoogle} />
+      <LoginNavbar />
       <LoginHeroSection />
       <LoginCards />
 
