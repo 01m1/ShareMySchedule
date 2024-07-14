@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cookies-next": "^4.2.1",
+    "firebase-admin": "^12.2.0",
     "framer-motion": "^11.2.13",
     "next": "^14.2.4",
+    "nookies": "^2.5.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-typed": "^2.0.12"

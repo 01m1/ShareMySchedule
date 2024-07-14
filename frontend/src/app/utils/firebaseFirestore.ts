@@ -1,6 +1,7 @@
 import { firestore } from '../config/config';  // Adjust path as necessary
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
-import { useRouter } from 'next/router';
+
+
 
 // export function getUserData(userEmail, uid){
 //     console.log("Getting user data for:", userEmail, uid);
@@ -16,12 +17,10 @@ export function getUserData(userEmail: string, uid: string) {
         .then((doc) => {
             if (doc.exists()) {
                 // Redirect to homepage
-                const router = useRouter();
-                router.push('/');
                 console.log("Document data:", doc.data());
             } else {
                 // Redirect to username page with the email and uid
-                const router = useRouter();
+
                 
                 console.log("No such document!");
             }
