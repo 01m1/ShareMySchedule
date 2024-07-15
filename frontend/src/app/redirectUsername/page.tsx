@@ -29,9 +29,20 @@ interface User {
 
 }
 
+interface FormData {
+  username: string;
+
+}
+
 
 function FormPage() {
-  const [user, setUser] = useState<User | null>(null);
+  // sets the user state to null by default
+  const [user, setUser] = useState<User | null>(null); 
+
+  // Use case for existing username
+  const [error, setError] = useState<string | null>(null);
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -61,9 +72,35 @@ function FormPage() {
 
     fetchUserData();
 }, []);
-  const handleSubmit = () => {
-    console.log('Submitted')
+
+  // function to handle the form submission
+  const handleSubmit = async (data: FormData) => {
+    console.log('Form data:', data);
+    try {
+      const response = await fetch("/api/checkUsername", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({username: data.username}),
+      })
+
+      if(response.ok){
+        const data = await response.json();
+        console.log('Username check response:', data);
+      }else{
+        console.error('Username check failed:', response);
+      }
+
+            
+    
+    } catch (error) {
+      console.error('Error during form submission:', error);
+    }
+  // In your /api/checkUsername route file
+
   }
+
 
 
   return (
@@ -89,5 +126,6 @@ function FormPage() {
     </div>
   )
 }
+
 
 export default FormPage
