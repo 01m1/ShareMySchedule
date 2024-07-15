@@ -10,11 +10,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 
     try {
-        console.log('Decoding ID token:', idToken);
         const decodedToken = await verifyIdToken(idToken);
+        console.log('Decoded token:', decodedToken);
         const uid = decodedToken.uid;
         const email = decodedToken.email;
-        console.log('Decoded token:', uid, email);
         
 
         // Check if the user exists in the database
@@ -38,9 +37,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         // Set the JWT token in a cookie
         const response  = NextResponse.json({ redirectUrl }, { status: 200 });
         response.cookies.set('token', token, {httpOnly: true, secure: process.env.NODE_ENV === 'development'} );
-        console.log('Setting token:', token);  // Debugging line
+        
         const test = response.cookies.get('token');
-        console.log('Getting token:', test);  // Debugging line
 
         
         return response;
