@@ -9,14 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "cookies-next": "^4.2.1",
     "firebase-admin": "^12.2.0",
     "framer-motion": "^11.2.13",
+    "lucide-react": "^0.408.0",
     "next": "^14.2.4",
     "nookies": "^2.5.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-typed": "^2.0.12"
+    "react-hook-form": "^7.52.1",
+    "react-typed": "^2.0.12",
+    "shadcn-ui": "^0.8.0",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

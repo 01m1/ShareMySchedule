@@ -4,6 +4,15 @@ import React from 'react'
 import {getUserData} from '@/app/utils/firebaseFirestore'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import * as z from 'zod';
+import {useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+const formSchema = z.object({
+  username: z.string().min(3).max(20),
+})
 
 // I want to get passed into here the user email and UID then 
 // user will create a username
@@ -12,15 +21,23 @@ import { useEffect, useState } from 'react';
 
 
 
+// interface for our user object
 interface User {
   email: string;
   uid: string;
-  // include other user properties as needed
+  username: string;
+
 }
 
 
 function FormPage() {
   const [user, setUser] = useState<User | null>(null);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: ''
+    }
+  })
 
   useEffect(() => {
     async function fetchUserData() {
@@ -44,19 +61,31 @@ function FormPage() {
 
     fetchUserData();
 }, []);
-
-
-
-
-
+  const handleSubmit = () => {
+    console.log('Submitted')
+  }
 
 
   return (
-    <div className='h-screen flex justify-center items-center'>
+    <div className='h-screen flex justify-center items-center bg-black'>
+      <main className='flex flex-col '>
+        <h1 className=' flex items-center justify-center font-extrabold text-6xl text-mustard '> Form Page</h1>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-4 h-[300px]">
+            <FormField control={form.control} name="username" render={({field}) =>{
+              return <FormItem>
+                <FormLabel className="flex justify-center text-white text-3xl font-bold"> User name</FormLabel>
+                <FormControl>
+                  <Input placeholder='Enter' {...field } />
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            } }/>
+            <Button typeof='submit' className='w-full bg-darkest-purple'> Submit </Button>
+            </form>
 
-        <h1 className='h-[400px] w-[400px] flex items-center justify-center font-extrabold text-6xl '> Form Page</h1>
-          {user && <p>{user.email}</p>}
-
+          </Form>
+      </main>
     </div>
   )
 }
