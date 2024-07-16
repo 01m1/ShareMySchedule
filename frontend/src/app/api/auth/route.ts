@@ -11,7 +11,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     try {
         const decodedToken = await verifyIdToken(idToken);
-        console.log('Decoded token:', decodedToken);
         const uid = decodedToken.uid;
         const email = decodedToken.email;
         
@@ -33,7 +32,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         // Create a JWT token for session management
         const token = jwt.sign({ decodedToken }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
-        console.log('Generated JWT token:', token);
         // Set the JWT token in a cookie
         const response  = NextResponse.json({ redirectUrl }, { status: 200 });
         response.cookies.set('token', token, {httpOnly: true, secure: process.env.NODE_ENV === 'development'} );

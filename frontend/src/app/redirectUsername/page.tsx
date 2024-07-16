@@ -25,7 +25,7 @@ const formSchema = z.object({
 interface User {
   email: string;
   uid: string;
-  username: string;
+  username?: string;
 
 }
 
@@ -41,6 +41,9 @@ function FormPage() {
 
   // Use case for existing username
   const [error, setError] = useState<string | null>(null);
+
+  // Send user to the homepage 
+  const router = useRouter();
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -75,7 +78,7 @@ function FormPage() {
 
   // function to handle the form submission
   const handleSubmit = async (data: FormData) => {
-    console.log('Form data:', data);
+    
     try {
       const response = await fetch("/api/checkUsername", {
         method: 'POST',
@@ -92,20 +95,34 @@ function FormPage() {
         }
         else{
           // Add the username to the user object and store it in the database
-          setUser(prevUser => {
-            if(prevUser){
-              return {...prevUser, username: data.username}
-            }
-            return null;
-          })
+          if (user) {
+            const updatedUser = { ...user, username: data.username } as User;
 
-          try {
-            await createUserDocument(user as User);
-            
-          } catch (error) {
-            console.error('Error creating user document:', error);
-            
+            try {
+              // Create the user document in the database
+              const createResponse = await fetch("/api/createUserDocument", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({updatedUser}),
+              })
+              if(createResponse.ok){
+                console.log('User document created successfully');
+                // Redirect to the homepage
+                
+                router.push('/');
+              } else {
+                console.error('Error creating user document:', createResponse);
+              }
+              
+            } catch (error) {
+              console.error('Error creating user document:', error);
+              
+            }
           }
+          
+
           
 
         }
@@ -143,7 +160,7 @@ function FormPage() {
             </form>
 
           </Form>
-          <h2 className='bg-white'>{user?.email}</h2>
+          <h2 className='bg-white'>{error}</h2>
       </main>
     </div>
   )

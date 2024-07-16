@@ -17,7 +17,6 @@ export function getUserData(userEmail: string, uid: string) {
         .then((doc) => {
             if (doc.exists()) {
                 // Redirect to homepage
-                console.log("Document data:", doc.data());
             } else {
                 // Redirect to username page with the email and uid
 
