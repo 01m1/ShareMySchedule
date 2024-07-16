@@ -1,9 +1,9 @@
 "use client"; // marks the component as a client component
-import nookies from 'nookies';
 import React from 'react'
 import {getUserData} from '@/app/utils/firebaseFirestore'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { createUserDocument } from '../utils/createUserDocument';
 import * as z from 'zod';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -86,8 +86,29 @@ function FormPage() {
       })
 
       if(response.ok){
-        const data = await response.json();
-        console.log('Username check response:', data);
+        const username = await response.json();
+        if(username.exists){
+          setError('Username already exists');
+        }
+        else{
+          // Add the username to the user object and store it in the database
+          setUser(prevUser => {
+            if(prevUser){
+              return {...prevUser, username: data.username}
+            }
+            return null;
+          })
+
+          try {
+            await createUserDocument(user as User);
+            
+          } catch (error) {
+            console.error('Error creating user document:', error);
+            
+          }
+          
+
+        }
       }else{
         console.error('Username check failed:', response);
       }
@@ -122,6 +143,7 @@ function FormPage() {
             </form>
 
           </Form>
+          <h2 className='bg-white'>{user?.email}</h2>
       </main>
     </div>
   )
