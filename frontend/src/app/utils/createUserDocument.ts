@@ -7,13 +7,13 @@ interface User {
 }
 
 
-export async function createUserDocument(user: User){
-    if(!user.uid) return;
+export async function createUserDocument(updatedUser: User){
+    if(!updatedUser.uid) return;
 
-    const useRef = adminFirestore.doc(`users/${user.uid}`);
+    const useRef = adminFirestore.doc(`users/${updatedUser.uid}`);
     await useRef.set({
-        email: user.email,
-        username: user.username,
+        email: updatedUser.email,
+        username: updatedUser.username,
         
     })
 
