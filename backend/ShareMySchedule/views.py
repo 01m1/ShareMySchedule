@@ -1,17 +1,21 @@
-from django.http import JsonResponse
-import google.auth.transport.requests
-import google.oauth2.credentials
-import googleapiclient.discovery
+import os
+import requests
+import datetime
+import pickle
+from googleapiclient.discovery import build
+from google.oauth2.credentials import Credentials
+from requests.structures import CaseInsensitiveDict
+from google_auth_oauthlib.flow import InstalledAppFlow
 
-def fetch_calendar_data(request):
-    token = request.headers.get('Authorization') # Get the auth token to display calendar
-    if not token:
-        return JsonResponse({'error': 'Token not provided'}, status=400) # Token fails to send
+import json
 
-    credentials = google.oauth2.credentials.Credentials(token)
-    service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials) # Fetch calendar
+# Load Google Calendar Data
+calendar_data= []
+SCOPES = ['https://www.googleapis.com/auth/calendar']
+flow = InstalledAppFlow.from_client_secrets_file("backend\\ShareMySchedule\\credentials.json", scopes=SCOPES)
 
-    calendar_list = service.calendarList().list().execute()
-    calendars = calendar_list.get('items', [])
+credentials = flow.run_local_server(port=0)
+pickle.dump(credentials, open("backend\\token.pkl", "wb"))
+credentials = pickle.load(open("token.pkl", "rb"))
 
-    return JsonResponse(calendars)
+service = build("calendar", "v3", credentials=credentials)
