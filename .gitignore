@@ -1,4 +1,4 @@
 # Default ignored files
 .idea
 /node_modules
-/backend/ShareMySchedule/credentials.json
+backend/ShareMySchedule/credentials.json
