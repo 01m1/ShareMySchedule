@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         const userRef = adminFirestore.collection('users').doc(uid);
         const userDoc = await userRef.get();
 
-        let redirectUrl = '/';
+        let redirectUrl = '/dashboard';
 
         // If the user does not exist, redirect to the registration page
         if (!userDoc.exists) {
