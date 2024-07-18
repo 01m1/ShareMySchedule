@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-#8--j5oj==oxsqad2_m=(spjw6+g13)no-rhq57l+1v@rj+8av
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+GOOGLE_CREDENTIALS = os.path.join(BASE_DIR, 'ShareMySchedule/client_secret.json')
 
 # Application definition
 
