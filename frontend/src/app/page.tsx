@@ -1,50 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import Logout from "./components/logoutButton/Logout";
+import React, { useEffect } from "react";
+import { signInWithGoogle } from "./utils/firebaseAuth"; // Adjust path as necessary
+import LoginNavbar from "./components//LoginPage/LoginNavbar";
+import LoginHeroSection from "./components/LoginPage/LoginHeroSection";
+import LoginCards from "./components/LoginPage/LoginCards";
 
-interface User {
-  email: string;
-  uid: string;
-  username: string;
-}
-
-export default function Home() {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    async function fetchUserData() {
-      try {
-        const response = await fetch("/api/user", {
-          method: "GET",
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data);
-        } else {
-          console.error("Failed to get user data");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    }
-
-    fetchUserData();
-  }, []);
-
+function LoginPage() {
   return (
-    <main className="h-screen flex justify-center items-center">
-      <Logout  />
-      <div className="flex flex-col gap-4">
-        <h1 className="flex justify-center items-center h-full w-full text-6xl font-extrabold">
-          Home Page
-        </h1>
-        <h2 className="flex justify-center text-4xl ">
-          Welcome...{user?.username}{" "}
-        </h2>
-      </div>
-    </main>
+    <div className="">
+      <LoginNavbar />
+      <LoginHeroSection />
+      <LoginCards />
+    </div>
   );
 }
+
+export default LoginPage;
