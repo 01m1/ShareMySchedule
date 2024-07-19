@@ -9,7 +9,7 @@ from googleapiclient.errors import HttpError
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
-def main():
+def get_google_calendar_data():
     creds = None
 
     # If token exists then load it from the client_secret file
@@ -47,6 +47,3 @@ def main():
             print(start, event["summary"])
     except HttpError as error:
         print("An error occured:", error)
-
-if __name__ == "__main__":
-    main()
