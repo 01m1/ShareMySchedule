@@ -29,9 +29,5 @@ frontend/.vercel
 frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 
-
-package-lock.json
-
 frontend/.env
 frontend/.env.local
-
