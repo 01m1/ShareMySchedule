@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { signInWithGoogle } from "@/app/utils/firebaseAuth";
-import { record } from "zod";
 
 function GoogleCalendar() {
     const [data, setData] = useState(null);
@@ -16,13 +14,18 @@ function GoogleCalendar() {
             .then(response => response.json())
             .then(data => setRecords({data}))
             .catch(error => console.log(error))
-        }, [])
+        }, []);
         // Function to fetch data
 
         return (
             <div>
                 {records}
             </div>
-        )
-    }
+        );
+    };
+    return (FetchData());
+      
 }
+
+
+export default GoogleCalendar;
