@@ -38,12 +38,11 @@ def get_google_calendar_data():
         events = event_result.get("items", [])
 
         if not events:
-            print("No upcoming events found")
-            return
+            return "No upcoming events found"
         
         # Print events 
         for event in events:
             start = event["start"].get("dateTime", event["start"].get("date"))
-            print(start, event["summary"])
+            return (start, event["summary"])
     except HttpError as error:
         print("An error occured:", error)

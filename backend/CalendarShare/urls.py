@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import google_calendar_view
+from . import views
 
 urlpatterns = [
-    path('api/google-calendar', google_calendar_view, name='google-calendar'),
-    path('', include('CaelndarShare.urls'))
+    path('', views.google_calendar_view , name='google_calendar'),
 ]

@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'CalendarShare',
     'corsheaders',
-
-    'posts',
 ]
 
 CORS_ALLOWS_ORIGINS = ["http://localhost:3000/"]
@@ -59,7 +57,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 's.urls'
+ROOT_URLCONF = 'ShareMySchedule.urls'
 
 TEMPLATES = [
     {
@@ -71,13 +69,13 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.mescsages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 's.wsgi.application'
+WSGI_APPLICATION = 'ShareMySchedule.wsgi.application'
 
 
 # Database

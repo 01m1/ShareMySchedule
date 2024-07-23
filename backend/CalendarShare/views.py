@@ -6,4 +6,5 @@ from .google_calendar import get_google_calendar_data
 @api_view(['GET'])
 def google_calendar_view(request):
     data = get_google_calendar_data()
+    print(data)
     return Response(data)
