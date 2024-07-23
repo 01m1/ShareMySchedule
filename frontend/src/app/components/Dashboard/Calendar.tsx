@@ -10,7 +10,7 @@ function GoogleCalendar() {
         const [records, setRecords] = useState([])
 
         useEffect(() => {
-            fetch('http://localhost:8000/api/google-calendar/')
+            fetch('http://localhost:8000/')
             .then(response => response.json())
             .then(data => setRecords({data}))
             .catch(error => console.log(error))
