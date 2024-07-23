@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Logout from "../components/logoutButton/Logout";
+import GoogleCalendar from "../components/Dashboard/Calendar";
 
 interface User {
   email: string;
@@ -37,6 +38,7 @@ export default function Home() {
   return (
     <main className="h-screen flex justify-center items-center">
       <Logout />
+      <GoogleCalendar/>
       <div className="flex flex-col gap-4">
         <h1 className="flex justify-center items-center h-full w-full text-6xl font-extrabold">
           Home Page

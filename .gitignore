@@ -1,8 +1,8 @@
 # Default ignored files
 .idea
 /frontend/node_modules
-frontend/client_secret.json
-frontend/token.json
+backend/ShareMySchedule/client_secret.json
+backend/ShareMySchedule/token.json
 
 frontend/.pnp
 frontend/.pnp.js
